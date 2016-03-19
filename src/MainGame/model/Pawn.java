@@ -13,7 +13,7 @@ public class Pawn extends ChessPiece{
 
     private boolean hasMoved;
 
-    protected Pawn(Player p) {
+    public Pawn(Player p) {
         super(p);
         hasMoved = false;
     }
