@@ -28,22 +28,23 @@ public class Pawn extends ChessPiece{
         if (!super.isValidMove(m, board))
             return false;
         else {
-        /* add more Pawn-specific validation rules here */
-            //see if they are moving diagonally, one space
-            if((m.toColumn != m.fromColumn+1 || m.toColumn != m.toColumn-1) &&
-                    m.toRow != m.fromRow+1){
-                return false;
+            //see if they are moving diagonally, one space, and capture
+            if((m.toColumn == m.fromColumn+1 || m.toColumn == m.toColumn-1) &&
+                    (m.toRow == m.fromRow+1 || m.toRow == m.fromRow-1) &&
+                    board[m.toRow][m.toColumn] != null &&
+                    board[m.toRow][m.toColumn].player() != this.player()){
+                return true;
             }
 
             //this check needs to go after the other check
             //check to see if they are trying to move 2 spaces
-            if((!hasMoved && m.toRow == m.toRow+2) &&
+            if((!hasMoved && (m.toRow == m.toRow+2)) &&
                     m.fromColumn == m.toColumn){
                 hasMoved = true;
                 return true;
             }
             //check to see if they are trying to move 1 space
-            if(m.toRow == m.fromRow+1 &&
+            if((m.toRow == m.fromRow+1 || m.toRow == m.fromRow-1) &&
                     m.fromColumn == m.toColumn) {
                 hasMoved = true;
                 return true;

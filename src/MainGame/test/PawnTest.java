@@ -6,6 +6,7 @@ import gvprojects.chess.model.Move;
 import gvprojects.chess.model.Player;
 import org.junit.Test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /************************************************************
@@ -29,12 +30,35 @@ public class PawnTest extends ChessPieceTest
     @Test
     public void canMoveForward() throws Exception {
         board[1][1] = piece;
-        assertTrue("Rook Test 1", piece.isValidMove(new Move(1, 1, 1, 6), board));
+        // -_-
+        assertTrue("Pawn Test 1 space -valid-", piece.isValidMove(new Move(1, 1, 2, 1), board));
     }
 
     @Test
-    public void canMoveInLeft() throws Exception {
-        board[4][4] = piece;
-        assertTrue("Rook Test 1", piece.isValidMove(new Move(4, 4, 4, 1), board));
+    public void canMoveForward2() throws Exception {
+        board[1][1] = piece;
+        assertTrue("Pawn Test 2 spaces -sometimes valid-", piece.isValidMove(new Move(1, 1, 2, 1), board));
     }
+
+    @Test
+    public void canMoveForward3() throws Exception {
+        board[1][1] = piece;
+        assertFalse("Pawn Test 3 spaces forward -invalid-", piece.isValidMove(new Move(1, 1, 4, 1), board));
+    }
+
+    @Test
+    public void complainsIfTryingToMoveBack() throws Exception {
+
+    }
+
+    @Test
+    public void complainsIfTryingToMoveTwoSpacesAfterFirstMove() throws Exception{
+
+    }
+
+
+
+    //check in passing XD
+
+    //check promotion
 }
