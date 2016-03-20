@@ -20,10 +20,36 @@ public abstract class ChessPiece implements IChessPiece{
         return owner;
     }
 
+    public int valueOf(IChessPiece p)
+    {
+        if (p instanceof Pawn)
+            return 1; /* Pawn is worth 1 point */
+        else if (p instanceof Queen)
+            return 9; /* queen is the most valuable */
+        else if (p instanceof  King)
+        {
+            return 9000;
+        }
+        else if(p instanceof Bishop)
+        {
+            return 1337;
+        }
+        else if(p instanceof Rook)
+        {
+            return 555555;
+        }
+        else if(p instanceof Knight)
+        {
+            return 12345;
+        }
+        else return 0;
+
+    }
+
     public boolean isValidMove (Move m, IChessPiece[][] board) throws IndexOutOfBoundsException, IllegalArgumentException
     {
 
-
+        // Add a rule to see if its a knight and if not check to see if the piece is moving through another one
         if(!(board[m.fromRow][m.fromColumn] == (this)))
         {
             throw new IllegalArgumentException();
