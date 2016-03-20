@@ -6,6 +6,7 @@ import gvprojects.chess.model.Move;
 import gvprojects.chess.model.Player;
 import org.junit.Test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -76,5 +77,13 @@ public class KnightTest extends ChessPieceTest {
     public void canMoveLeftDown() throws Exception {
         board[4][4] = piece;
         assertTrue("Rook Test 1", piece.isValidMove(new Move(4, 4, 5, 2), board));
+    }
+
+    @Test
+    public void cannotMoveToRandomLocations() throws Exception {
+        board[4][4] = piece;
+        assertFalse("Knight Rand Move Test", piece.isValidMove(new Move(4, 4, 1, 3), board));
+        assertFalse("Knight Rand Move Test", piece.isValidMove(new Move(4, 4, 5, 1), board));
+        assertFalse("Knight Rand Move Test", piece.isValidMove(new Move(4, 4, 1, 2), board));
     }
 }
