@@ -28,9 +28,10 @@ public class King extends ChessPiece{
         else
         {
             //if they are anymore then one space away from the king... fail
-            if((m.toColumn > m.fromColumn+1 && m.toRow > m.toRow-1) ||
-                    m.toColumn < m.toColumn-1 && m.toRow < m.toRow-1)
+            if((m.toColumn > m.fromColumn+1 || m.toColumn < m.fromColumn-1) ||
+                    m.toRow > m.fromRow+1 || m.toRow < m.fromRow-1)
                 return false;
+
             return true;
         }
     }

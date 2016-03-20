@@ -6,6 +6,7 @@ import gvprojects.chess.model.Move;
 import gvprojects.chess.model.Player;
 import org.junit.Test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -42,6 +43,10 @@ public class KingTest extends ChessPieceTest {
 
     @Test
     public void cannotMoveOtherThanRightNextToItself() throws Exception{
-        assertFalse("King Test 1 space up", piece.isValidMove(new Move(4, 4, 5, 4), board));
+        board[4][4] = piece;
+        assertFalse("King Test 1 space rand", piece.isValidMove(new Move(4, 4, 6, 4), board));
+        assertFalse("King Test 1 space rand", piece.isValidMove(new Move(4, 4, 5, 6), board));
+        assertFalse("King Test 1 space rand", piece.isValidMove(new Move(4, 4, 4, 7), board));
+        assertFalse("King Test 1 space rand", piece.isValidMove(new Move(4, 4, 1, 4), board));
     }
 }
