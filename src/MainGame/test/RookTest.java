@@ -9,9 +9,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/***
- * Created by Cameron Sprowls on 3/17/2016.
- */
+/*********************************************************************
+ * Created by Cameron Sprowls and Josh Eldridge on 3/17/2016.
+ *******************************************************************/
 public class RookTest extends ChessPieceTest{
     protected IChessPiece make(Player p) {
         return new Rook(p);

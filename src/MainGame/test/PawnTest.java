@@ -28,37 +28,65 @@ public class PawnTest extends ChessPieceTest
     }
 
     @Test
-    public void canMoveForward() throws Exception {
+    public void canMoveForwardOneAtATime() throws Exception {
         board[1][1] = piece;
-        // -_-
         assertTrue("Pawn Test 1 space -valid-", piece.isValidMove(new Move(1, 1, 2, 1), board));
+        board[2][1] = piece;
+        assertTrue("Pawn Test 1 space -valid-", piece.isValidMove(new Move(2, 1, 3, 1), board));
+        board[3][1] = piece;
+        assertTrue("Pawn Test 1 space -valid-", piece.isValidMove(new Move(3, 1, 4, 1), board));
+        board[4][1] = piece;
+        assertTrue("Pawn Test 1 space -valid-", piece.isValidMove(new Move(4, 1, 5, 1), board));
+        board[5][1] = piece;
+        assertTrue("Pawn Test 1 space -valid-", piece.isValidMove(new Move(5, 1, 6, 1), board));
+        board[6][1] = piece;
+        assertTrue("Pawn Test 1 space -valid-", piece.isValidMove(new Move(6, 1, 7, 1), board));
     }
 
     @Test
-    public void canMoveForward2() throws Exception {
+    public void canMoveForward2Spaces() throws Exception {
         board[1][1] = piece;
-        assertTrue("Pawn Test 2 spaces -sometimes valid-", piece.isValidMove(new Move(1, 1, 2, 1), board));
+        assertTrue("Pawn Test 2 spaces from start -valid-", piece.isValidMove(new Move(1, 1, 3, 1), board));
+        assertFalse("Pawn Test 2 spaces after two space move -invalid-", piece.isValidMove(new Move(1, 1, 5, 1), board));
     }
 
     @Test
-    public void canMoveForward3() throws Exception {
+    public void canMoveForwardMoreTests() throws Exception {
+        board [0][5] = piece;
+        assertTrue("Pawn Test 2 spaces from start-valid-", piece.isValidMove(new Move(0, 5, 2, 5), board));
+        board[2][5] = piece;
+        assertTrue("Pawn Test 1 space after 2 space move -valid-", piece.isValidMove(new Move(2, 5, 3, 5), board));
+        board[3][5] = piece;
+        assertFalse("Pawn Test 2 spaces after one space move -invalid-", piece.isValidMove(new Move(3, 5, 5, 5), board));
+    }
+
+    @Test
+    public void complainsIfTryingToMoveThree() throws Exception {
         board[1][1] = piece;
         assertFalse("Pawn Test 3 spaces forward -invalid-", piece.isValidMove(new Move(1, 1, 4, 1), board));
     }
 
     @Test
-    public void complainsIfTryingToMoveBack() throws Exception {
-
+    public void complainsIfTryingToMoveToTheSide() throws Exception {
+        board[1][1] = piece;
+        assertFalse("Pawn Test 3 spaces forward -invalid-", piece.isValidMove(new Move(1, 1, 1, 2), board));
+        board[1][2] = piece;
+        assertFalse("Pawn Test 3 spaces forward -invalid-", piece.isValidMove(new Move(1, 1, 1, 5), board));
+        board[1][4] = piece;
+        assertFalse("Pawn Test 3 spaces forward -invalid-", piece.isValidMove(new Move(1, 1, 1, 4), board));
+        board[1][7] = piece;
+        assertFalse("Pawn Test 3 spaces forward -invalid-", piece.isValidMove(new Move(1, 1, 1, 7), board));
     }
 
     @Test
-    public void complainsIfTryingToMoveTwoSpacesAfterFirstMove() throws Exception{
-
+    public void complainsIfTryingToMoveBack() throws Exception {
+        //HA
     }
 
 
 
     //check in passing XD
-
+    // Oh god
+    // Let's not ever promote
     //check promotion
 }

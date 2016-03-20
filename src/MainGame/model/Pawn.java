@@ -5,7 +5,7 @@ import gvprojects.chess.model.Move;
 import gvprojects.chess.model.Player;
 
 /***********************************************
- * Created by Cameron Sprowls on 3/18/2016.
+ * Created by Cameron Sprowls and Josh Eldridge on 3/18/2016.
  *
  * Class for the pawn piece
  **********************************************/
@@ -36,10 +36,8 @@ public class Pawn extends ChessPiece{
                 return true;
             }
 
-            //this check needs to go after the other check
             //check to see if they are trying to move 2 spaces
-            if((!hasMoved && (m.toRow == m.toRow+2)) &&
-                    m.fromColumn == m.toColumn){
+            if(!hasMoved && m.toRow == m.fromRow+2 && m.fromColumn == m.toColumn){
                 hasMoved = true;
                 return true;
             }

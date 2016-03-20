@@ -5,7 +5,7 @@ import gvprojects.chess.model.Move;
 import gvprojects.chess.model.Player;
 
 /***************************************************
- * Created by Cameron Sprowls on 3/17/2016.
+ * Created by Cameron Sprowls and Josh Eldridge on 3/17/2016.
  *************************************************/
 
 public abstract class ChessPiece implements IChessPiece{
