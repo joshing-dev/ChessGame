@@ -4,11 +4,9 @@ import gvprojects.chess.model.IChessPiece;
 import gvprojects.chess.model.Move;
 import gvprojects.chess.model.Player;
 
-/***********************************************
- * Created by Cameron Sprowls and Josh Eldridge on 3/18/2016.
- *
- * Class for the pawn piece
- **********************************************/
+/************************************************************
+ * Created by Cameron Sprowls and Josh Eldridge on 3/19/2016.
+ **********************************************************/
 public class Pawn extends ChessPiece{
 
     private boolean hasMoved;

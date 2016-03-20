@@ -9,9 +9,9 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by Doomninja on 3/19/2016.
- */
+/************************************************************
+ * Created by Cameron Sprowls and Josh Eldridge on 3/19/2016.
+ **********************************************************/
 public class KingTest extends ChessPieceTest {
     protected IChessPiece make(Player p) {
         return new King(p);

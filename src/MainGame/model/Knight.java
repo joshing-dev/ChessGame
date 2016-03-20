@@ -4,9 +4,9 @@ import gvprojects.chess.model.IChessPiece;
 import gvprojects.chess.model.Move;
 import gvprojects.chess.model.Player;
 
-/**
+/************************************************************
  * Created by Cameron Sprowls and Josh Eldridge on 3/19/2016.
- */
+ **********************************************************/
 public class Knight extends ChessPiece {
 
     public Knight(Player p) {
