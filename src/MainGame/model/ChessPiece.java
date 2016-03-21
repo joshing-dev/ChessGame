@@ -67,6 +67,15 @@ public abstract class ChessPiece implements IChessPiece{
 
         return true;
     }
+    public boolean pieceInPath(int x1, int y1, int x2, int y2)
+    {
+        int xtemp = 0, ytemp = 0;
+        if(x1 < x2)
+        {
+            xtemp = x1 + 1;
+        }
+        return false;
+    }
 
     public abstract String type();
 }
