@@ -79,8 +79,11 @@ public class PawnTest extends ChessPieceTest
     }
 
     @Test
-    public void complainsIfTryingToMoveBack() throws Exception {
-        //HA
+    public void complainsIfTryingToMoveThroughPiece() throws Exception {
+        //this is the same piece...
+        board[1][1] = piece;
+        board[1][2] = piece;
+        assertFalse("Pawn Test move through piece -invalid-", piece.isValidMove(new Move(1,1,1,3), board));
     }
 
 

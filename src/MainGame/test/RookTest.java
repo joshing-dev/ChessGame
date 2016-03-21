@@ -81,4 +81,11 @@ public class RookTest extends ChessPieceTest{
         assertFalse("Rook Test 9", piece.isValidMove(new Move(4, 4, 5, 3), board));
         assertFalse("Rook Test 9", piece.isValidMove(new Move(4, 4, 3, 5), board));
     }
+
+    @Test
+    public void complainsIfTryingToMoveThroughPiece() throws Exception {
+        board[1][1] = piece;
+        board[1][4] = piece;
+        assertFalse("Pawn Test move through piece -invalid-", piece.isValidMove(new Move(1,1,1,6), board));
+    }
 }

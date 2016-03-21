@@ -5,9 +5,9 @@ import gvprojects.chess.model.IChessPiece;
 import gvprojects.chess.model.Move;
 import gvprojects.chess.model.Player;
 
-/**
- * Created by Eldridge on 3/20/2016.
- */
+/*********************************************************************
+ * Created by Cameron Sprowls and Josh Eldridge on 3/20/2016.
+ *********************************************************************/
 public class ChessModel implements IChessModel {
 
     private int numRows, numColumns;

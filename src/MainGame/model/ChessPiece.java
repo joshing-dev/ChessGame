@@ -26,21 +26,17 @@ public abstract class ChessPiece implements IChessPiece{
             return 1; /* Pawn is worth 1 point */
         else if (p instanceof Queen)
             return 9; /* queen is the most valuable */
-        else if (p instanceof  King)
-        {
-            return 9000;
-        }
         else if(p instanceof Bishop)
         {
-            return 1337;
+            return 3;
         }
         else if(p instanceof Rook)
         {
-            return 555555;
+            return 5;
         }
         else if(p instanceof Knight)
         {
-            return 12345;
+            return 3;
         }
         else return 0;
 
@@ -48,8 +44,11 @@ public abstract class ChessPiece implements IChessPiece{
 
     public boolean isValidMove (Move m, IChessPiece[][] board) throws IndexOutOfBoundsException, IllegalArgumentException
     {
-
+        
         // Add a rule to see if its a knight and if not check to see if the piece is moving through another one
+
+
+
         if(!(board[m.fromRow][m.fromColumn] == (this)))
         {
             throw new IllegalArgumentException();
@@ -60,22 +59,48 @@ public abstract class ChessPiece implements IChessPiece{
             return false;
 
         //make sure they aren't moving to a space of the same player
-        if(board[m.toRow][m.toColumn] != null) {
+        if(board[m.toRow][m.toColumn] != null) 
+        {
             if (board[m.fromRow][m.fromColumn].player() == (board[m.toRow][m.toColumn].player()))
                 return false;
         }
-
+        if(!(board[m.fromRow][m.fromColumn] instanceof Knight))
+        {
+            return !(pieceInPath(m.fromRow, m.fromColumn, m.toRow, m.toColumn, board));
+        }
+        
+        
         return true;
     }
-    public boolean pieceInPath(int x1, int y1, int x2, int y2)
+    public boolean pieceInPath(int x1, int y1, int x2, int y2, IChessPiece[][] board)
     {
-        int xtemp = 0, ytemp = 0;
-        if(x1 < x2)
+        int xtemp = x1, ytemp = y1;
+        if (x1 < x2) {
+            xtemp += 1;
+        }
+        if (x1 > x2) {
+            xtemp -= 1;
+        }
+        if (y1 < y2) {
+            ytemp += 1;
+        }
+        if (y1 > y2) {
+            ytemp -= 1;
+        }
+        if((xtemp == x2 ) && (ytemp == y2))
+            return false;
+        if(board[xtemp][ytemp] != null)
         {
-            xtemp = x1 + 1;
+            return true;
+        }
+        else{
+            if((x1 != x2 ) || (y1 != y2))
+            {
+                return pieceInPath(xtemp, ytemp, x2, y2, board);
+            }
         }
         return false;
-    }
+    } //  <--------------  8=============D  Fuck. You.
 
     public abstract String type();
 }

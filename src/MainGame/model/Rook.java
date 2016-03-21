@@ -28,7 +28,7 @@ public class Rook extends ChessPiece {
             return false;
         else
         {
-            //see if they aren't in the same row/col(1,1,1,6)
+            //see if they aren't in the same row/col
             if((m.fromRow == m.toRow && m.fromColumn != m.toColumn) ||
                     (m.fromRow != m.toRow && m.fromColumn == m.toColumn))
                 return true;
