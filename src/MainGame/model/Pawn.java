@@ -10,9 +10,10 @@ import gvprojects.chess.model.Player;
 public class Pawn extends ChessPiece{
 
     private boolean hasMoved;
-
+    private Player p;
     public Pawn(Player p) {
         super(p);
+        this.p = p;
         hasMoved = false;
     }
 
@@ -26,6 +27,17 @@ public class Pawn extends ChessPiece{
         if (!super.isValidMove(m, board))
             return false;
         else {
+            //see if they're black and trying to move their pawn UP the board
+            //FIXME this may mave to be switched around in the future
+            if(p == Player.BLACK && (m.fromRow - m.toRow > 0)){
+                return false;
+            }
+
+            //see if they're white and trying to move their pawn DOwN the board
+            if(p == Player.WHITE && (m.toRow - m.fromRow < 0)){
+                return false;
+            }
+            
             //see if they are moving diagonally, one space, and capture
             if((m.toColumn == m.fromColumn+1 || m.toColumn == m.toColumn-1) &&
                     (m.toRow == m.fromRow+1 || m.toRow == m.fromRow-1) &&
@@ -45,9 +57,6 @@ public class Pawn extends ChessPiece{
                 hasMoved = true;
                 return true;
             }
-
-
-
             //I think that's it... for now
             return false;
         }

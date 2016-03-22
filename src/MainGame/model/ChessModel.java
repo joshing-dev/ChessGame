@@ -19,6 +19,29 @@ public class ChessModel implements IChessModel {
     {
         numRows = 8;
         numColumns = 8;
+        currentPlayer = Player.WHITE;
+        board[0][0] = new Rook(Player.BLACK);
+        board[0][1] = new Knight(Player.BLACK);
+        board[0][2] = new Bishop(Player.BLACK);
+        board[0][3] = new Queen(Player.BLACK);
+        board[0][4] = new King(Player.BLACK);
+        board[0][5] = new Bishop(Player.BLACK);
+        board[0][6] = new Knight(Player.BLACK);
+        board[0][7] = new Rook(Player.BLACK);
+        for(int i = 0; i <= 7; i++)
+        {
+            board[1][i] = new Pawn(Player.BLACK);
+            board[6][i] = new Pawn(Player.WHITE);
+        }
+        board[7][0] = new Rook(Player.WHITE);
+        board[7][1] = new Knight(Player.WHITE);
+        board[7][2] = new Bishop(Player.WHITE);
+        board[7][3] = new Queen(Player.WHITE);
+        board[7][4] = new King(Player.WHITE);
+        board[7][5] = new Bishop(Player.WHITE);
+        board[7][6] = new Knight(Player.WHITE);
+        board[7][7] = new Rook(Player.WHITE);
+
     }
     @Override
     public int numRows() {
@@ -41,13 +64,26 @@ public class ChessModel implements IChessModel {
     }
 
     @Override
-    public boolean isValidMove(Move move) {
+    public boolean isValidMove(Move move) throws IndexOutOfBoundsException {
+        if((board[move.fromRow][move.fromColumn].player() == this.currentPlayer() && board[move.fromRow][move.fromColumn].isValidMove(move, board)))
+        return true;
+        else
         return false;
     }
 
     @Override
-    public void move(Move move) {
-
+    public void move(Move move) throws IllegalArgumentException, IllegalStateException {
+        if(isValidMove(move))
+        {
+            board[move.toRow][move.toColumn] = board[move.fromRow][move.fromColumn];
+            board[move.fromRow][move.fromColumn] = null;
+            if(currentPlayer() == Player.WHITE)
+                currentPlayer = Player.BLACK;
+            else
+                currentPlayer = Player.WHITE;
+        }
+        else
+            throw new IllegalStateException();
     }
 
     @Override
@@ -57,6 +93,6 @@ public class ChessModel implements IChessModel {
 
     @Override
     public Player currentPlayer() {
-        return null;
+        return currentPlayer;
     }
 }

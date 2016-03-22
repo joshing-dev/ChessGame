@@ -86,6 +86,16 @@ public class PawnTest extends ChessPieceTest
         assertFalse("Pawn Test move through piece -invalid-", piece.isValidMove(new Move(1,1,1,3), board));
     }
 
+    @Test
+    public void complainsIfTryingToMoveBackAsWhite() throws Exception {
+        board[1][1] = piece;
+        if(piece.player() == Player.WHITE){
+            assertFalse("Pawn Test move back as white -invalid-", piece.isValidMove(new Move(1,1,1,0), board));
+        }else{
+            assertFalse("Pawn Test move up as black   -invalid-", piece.isValidMove(new Move(1,1,1,2), board));
+        }
+    }
+
 
 
     //check in passing XD
