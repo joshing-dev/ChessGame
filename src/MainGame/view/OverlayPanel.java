@@ -1,7 +1,7 @@
-package gvprojects.chess.view;
+package MainGame.view;
 
 import gvprojects.chess.model.Move;
-import gvprojects.chess.presenter.ChessMoveEvent;
+import MainGame.presenter.ChessMoveEvent;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

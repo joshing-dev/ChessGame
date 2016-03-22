@@ -1,4 +1,4 @@
-package gvprojects.chess.presenter;
+package MainGame.presenter;
 
 import java.util.EventListener;
 

@@ -1,10 +1,10 @@
-package gvprojects.chess.presenter;
+package MainGame.presenter;
 
 import MainGame.model.ChessModel;
 import gvprojects.chess.model.IChessModel;
 import gvprojects.chess.model.Move;
-import gvprojects.chess.view.GUI;
-import gvprojects.chess.view.IView;
+import MainGame.view.GUI;
+import MainGame.view.IView;
 
 public class ChessPresenter {
 
@@ -47,7 +47,6 @@ public class ChessPresenter {
     * @param args
     */
    public static void main(String[] args) {
-      // TODO Replace the null below with an instance of your own chess model
       new ChessPresenter(new GUI(), new ChessModel());
    }
 

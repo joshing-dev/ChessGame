@@ -1,7 +1,7 @@
-package gvprojects.chess.view;
+package MainGame.view;
 
-import gvprojects.chess.presenter.ChessListener;
-import gvprojects.chess.presenter.ChessMoveEvent;
+import MainGame.presenter.ChessListener;
+import MainGame.presenter.ChessMoveEvent;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

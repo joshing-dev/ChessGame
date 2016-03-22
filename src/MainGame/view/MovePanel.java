@@ -1,4 +1,4 @@
-package gvprojects.chess.view;
+package MainGame.view;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

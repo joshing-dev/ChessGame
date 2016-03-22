@@ -1,4 +1,4 @@
-package gvprojects.chess.presenter;
+package MainGame.presenter;
 
 import gvprojects.chess.model.Move;
 

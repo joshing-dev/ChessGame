@@ -44,6 +44,19 @@ public class ChessModel implements IChessModel {
         board[7][7] = new Rook(Player.BLACK);
 
     }
+
+    public ChessModel (int[] positions, IChessPiece[] pieces){
+        numRows = 8;
+        numColumns = 8;
+        currentPlayer = Player.WHITE;
+        board = new IChessPiece[numRows][numColumns];
+        int counter = 0;
+        for(IChessPiece i : pieces){
+            board[positions[counter]][positions[counter+1]] = i;
+            counter += 2;
+        }
+    }
+
     @Override
     public int numRows() {
         return numRows;
@@ -94,6 +107,10 @@ public class ChessModel implements IChessModel {
     public boolean inCheck()
     {
         // TODO: Finish this
+        //we can do this one of two ways...
+        //check every other piece and see if they can take the king
+        //or check all of the spaces around the king and see if anything is able to take it
+        //I prefer the first method
         return false;
     }
 
