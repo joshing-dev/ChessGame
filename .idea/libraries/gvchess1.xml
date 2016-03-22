@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="gvchess1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/gvchess.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

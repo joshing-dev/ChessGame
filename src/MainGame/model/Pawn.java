@@ -28,15 +28,14 @@ public class Pawn extends ChessPiece{
             return false;
         else {
             //see if they're black and trying to move their pawn UP the board
-            //FIXME this may mave to be switched around in the future
-            if(p == Player.BLACK && (m.fromRow - m.toRow > 0)){
-                return false;
-            }
+            //if(p == Player.BLACK && (m.fromRow - m.toRow < 0)){
+            //    return false;
+            //}
 
             //see if they're white and trying to move their pawn DOwN the board
-            if(p == Player.WHITE && (m.toRow - m.fromRow < 0)){
-                return false;
-            }
+            //if(p == Player.WHITE && (m.toRow - m.fromRow < 0)){
+            //    return false;
+           // }
             
             //see if they are moving diagonally, one space, and capture
             if((m.toColumn == m.fromColumn+1 || m.toColumn == m.toColumn-1) &&

@@ -44,11 +44,6 @@ public abstract class ChessPiece implements IChessPiece{
 
     public boolean isValidMove (Move m, IChessPiece[][] board) throws IndexOutOfBoundsException, IllegalArgumentException
     {
-        
-        // Add a rule to see if its a knight and if not check to see if the piece is moving through another one
-
-
-
         if(!(board[m.fromRow][m.fromColumn] == (this)))
         {
             throw new IllegalArgumentException();
