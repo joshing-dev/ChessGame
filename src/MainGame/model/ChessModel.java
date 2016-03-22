@@ -60,7 +60,9 @@ public class ChessModel implements IChessModel {
     }
 
     @Override
-    public boolean isComplete() {
+    public boolean isComplete()
+    {
+        // TODO: Finish this
         return false;
     }
 
@@ -89,7 +91,9 @@ public class ChessModel implements IChessModel {
     }
 
     @Override
-    public boolean inCheck() {
+    public boolean inCheck()
+    {
+        // TODO: Finish this
         return false;
     }
 

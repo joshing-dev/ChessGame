@@ -32,7 +32,9 @@ public class ChessPresenter {
                   + "'s turn to play");
             view.addMoveRecord(loc(m));
          } else
-            view.showErrorMessage("Can't move that piece");
+            //view.showErrorMessage("Can't move that piece");
+            // STOP WITH THE DIALOG
+          System.out.println("Can't do that.");
       }
    };
 

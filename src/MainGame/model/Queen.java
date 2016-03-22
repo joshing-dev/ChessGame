@@ -28,24 +28,9 @@ public class Queen extends ChessPiece {
             // Soooo implement both rook and bishop logic
         else
         {
-            int rowDiff = Math.abs(m.fromRow - m.toRow);
-            int colDiff = Math.abs(m.fromColumn - m.toColumn);
-            // Diagonal up left
-            if((m.toColumn < m.fromColumn && m.toRow < m.fromRow) &&
-                    rowDiff == colDiff)
+            if(Math.abs(m.fromColumn - m.toColumn) == Math.abs(m.fromRow - m.toRow)){
                 return true;
-            // Diagonal up right
-            if((m.toColumn > m.fromColumn && m.toRow < m.fromRow) &&
-                    rowDiff == colDiff)
-                return true;
-            // Diagonal down left
-            if((m.toColumn < m.fromColumn && m.toRow > m.fromRow) &&
-                    rowDiff == colDiff)
-                return true;
-            // Diagonal down right
-            if((m.toColumn > m.fromColumn && m.toRow > m.fromRow) &&
-                    rowDiff == colDiff)
-                return true;
+            }
 
             //see if they aren't in the same row/col
             if((m.fromRow == m.toRow && m.fromColumn != m.toColumn) ||

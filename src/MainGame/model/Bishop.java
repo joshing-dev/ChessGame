@@ -28,24 +28,10 @@ public class Bishop extends ChessPiece {
         // We need to make sure it IS a diagonal line though.. like +1/-1 on each row/col
         else
         {
-            int rowDiff = Math.abs(m.fromRow - m.toRow);
-            int colDiff = Math.abs(m.fromColumn - m.toColumn);
-            // Diagonal up left
-            if((m.toColumn < m.fromColumn && m.toRow < m.fromRow) &&
-                    rowDiff == colDiff)
+            if(Math.abs(m.fromColumn - m.toColumn) == Math.abs(m.fromRow - m.toRow)){
                 return true;
-            // Diagonal up right
-            if((m.toColumn > m.fromColumn && m.toRow < m.fromRow) &&
-                    rowDiff == colDiff)
-                return true;
-            // Diagonal down left
-            if((m.toColumn < m.fromColumn && m.toRow > m.fromRow) &&
-                    rowDiff == colDiff)
-                return true;
-            // Diagonal down right
-            if((m.toColumn > m.fromColumn && m.toRow > m.fromRow) &&
-                    rowDiff == colDiff)
-                return true;
+            }
+
 
             return false;
         }

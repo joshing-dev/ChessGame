@@ -28,31 +28,39 @@ public class Pawn extends ChessPiece{
             return false;
         else {
             //see if they're black and trying to move their pawn UP the board
-            //if(p == Player.BLACK && (m.fromRow - m.toRow < 0)){
-            //    return false;
-            //}
+            if(p == Player.BLACK && (m.fromRow - m.toRow < 0)){
+                return false;
+            }
 
             //see if they're white and trying to move their pawn DOwN the board
-            //if(p == Player.WHITE && (m.toRow - m.fromRow < 0)){
-            //    return false;
-           // }
+            if(p == Player.WHITE && (m.toRow - m.fromRow < 0)){
+                return false;
+            }
             
             //see if they are moving diagonally, one space, and capture
-            if((m.toColumn == m.fromColumn+1 || m.toColumn == m.toColumn-1) &&
-                    (m.toRow == m.fromRow+1 || m.toRow == m.fromRow-1) &&
+            if((Math.abs(m.fromColumn - m.toColumn) == 1) && (Math.abs(m.fromRow - m.toRow) == 1) &&
                     board[m.toRow][m.toColumn] != null &&
                     board[m.toRow][m.toColumn].player() != this.player()){
                 return true;
             }
 
             //check to see if they are trying to move 2 spaces
-            if(!hasMoved && m.toRow == m.fromRow+2 && m.fromColumn == m.toColumn){
+            if(!hasMoved &&  board[m.fromRow][m.fromColumn].player() == Player.BLACK && m.toRow == m.fromRow-2 && m.fromColumn == m.toColumn)
+            {
+                if(board[m.toRow][m.toColumn] == this)
+                hasMoved = true;
+                return true;
+            }
+            if(!hasMoved &&  board[m.fromRow][m.fromColumn].player() == Player.WHITE && m.toRow == m.fromRow+2 && m.fromColumn == m.toColumn)
+            {
+                if(board[m.toRow][m.toColumn] == this)
                 hasMoved = true;
                 return true;
             }
             //check to see if they are trying to move 1 space
             if((m.toRow == m.fromRow+1 || m.toRow == m.fromRow-1) &&
-                    m.fromColumn == m.toColumn) {
+                    m.fromColumn == m.toColumn
+                    && board[m.toRow][m.toColumn] == null) {
                 hasMoved = true;
                 return true;
             }
