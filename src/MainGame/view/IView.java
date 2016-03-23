@@ -1,6 +1,7 @@
-package MainGame.view;
+package maingame.view;
 
-import MainGame.presenter.ChessListener;
+
+import maingame.presenter.ChessListener;
 
 public interface IView {
    void movePiece(int r1, int c1, int r2, int c2);

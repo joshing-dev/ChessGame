@@ -1,7 +1,9 @@
-package MainGame.view;
+package maingame.view;
 
-import MainGame.presenter.ChessListener;
-import MainGame.presenter.ChessMoveEvent;
+
+
+import maingame.presenter.ChessListener;
+import maingame.presenter.ChessMoveEvent;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

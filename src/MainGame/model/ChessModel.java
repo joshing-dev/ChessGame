@@ -1,4 +1,4 @@
-package MainGame.model;
+package maingame.model;
 
 import gvprojects.chess.model.IChessModel;
 import gvprojects.chess.model.IChessPiece;

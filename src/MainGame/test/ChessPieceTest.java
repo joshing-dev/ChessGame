@@ -1,4 +1,4 @@
-package MainGame.test;
+package maingame.test;
 
 import gvprojects.chess.model.IChessPiece;
 import gvprojects.chess.model.Move;

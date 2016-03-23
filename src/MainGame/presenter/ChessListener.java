@@ -1,4 +1,4 @@
-package MainGame.presenter;
+package maingame.presenter;
 
 import java.util.EventListener;
 

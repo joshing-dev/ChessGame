@@ -1,6 +1,5 @@
-package MainGame.model;
+package maingame.model;
 
-import MainGame.model.ChessPiece;
 import gvprojects.chess.model.IChessPiece;
 import gvprojects.chess.model.Move;
 import gvprojects.chess.model.Player;
