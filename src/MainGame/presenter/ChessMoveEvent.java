@@ -1,4 +1,4 @@
-package MainGame.presenter;
+package maingame.presenter;
 
 import gvprojects.chess.model.Move;
 
@@ -8,7 +8,6 @@ public class ChessMoveEvent extends AWTEvent {
 
    public ChessMoveEvent(Move m) {
       super(m, 0);
-      // TODO Auto-generated constructor stub
    }
 
 }
