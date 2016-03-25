@@ -26,6 +26,9 @@ public class ChessPresenter {
       public void pieceMoved(ChessMoveEvent ev) {
          Move m = (Move) ev.getSource();
          System.out.println(m.fromRow + " : " + m.fromColumn);
+         if(model.isComplete()){
+            System.out.println("Checkmate");
+         }
          if (model.isValidMove(m)) {
             model.move(m);
             view.movePiece(m.fromRow, m.fromColumn, m.toRow, m.toColumn);
@@ -48,7 +51,6 @@ public class ChessPresenter {
     * @param args
     */
    public static void main(String[] args) {
-      // TODO Replace the null below with an instance of your own chess model
       new ChessPresenter(new GUI(), new ChessModel());
    }
 

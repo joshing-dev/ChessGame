@@ -45,18 +45,25 @@ public class Pawn extends ChessPiece{
             }
 
             //check to see if they are trying to move 2 spaces
-            if(!hasMoved &&  board[m.fromRow][m.fromColumn].player() == Player.BLACK && m.toRow == m.fromRow-2 && m.fromColumn == m.toColumn)
+            if(!hasMoved &&
+                    board[m.fromRow][m.fromColumn].player() == Player.BLACK && m.toRow == m.fromRow-2 &&
+                    m.fromColumn == m.toColumn &&
+                    board[m.toRow][m.toColumn] == null)
             {
                 if(board[m.toRow][m.toColumn] == this)
                 hasMoved = true;
                 return true;
             }
-            if(!hasMoved &&  board[m.fromRow][m.fromColumn].player() == Player.WHITE && m.toRow == m.fromRow+2 && m.fromColumn == m.toColumn)
+            if(!hasMoved &&
+                    board[m.fromRow][m.fromColumn].player() == Player.WHITE && m.toRow == m.fromRow+2 &&
+                    m.fromColumn == m.toColumn &&
+                    board[m.toRow][m.toColumn] == null)
             {
                 if(board[m.toRow][m.toColumn] == this)
                 hasMoved = true;
                 return true;
             }
+
             //check to see if they are trying to move 1 space
             if((m.toRow == m.fromRow+1 || m.toRow == m.fromRow-1) &&
                     m.fromColumn == m.toColumn
@@ -64,7 +71,6 @@ public class Pawn extends ChessPiece{
                 hasMoved = true;
                 return true;
             }
-            //I think that's it... for now
             return false;
         }
     }

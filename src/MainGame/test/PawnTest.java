@@ -96,6 +96,12 @@ public class PawnTest extends ChessPieceTest
         }
     }
 
+    @Test public void FRICKENPAWNSCANATTACKFORWARDWATWATWAT() throws Exception {
+        board [1][1] = piece;
+        board [3][1] = piece;
+        assertFalse("Pawns should NOT be allowed to do this", piece.isValidMove(new Move(1,1,3,1), board));
+    }
+
 
 
     //check in passing XD

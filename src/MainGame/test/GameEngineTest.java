@@ -68,7 +68,19 @@ public class GameEngineTest{
         model.move(new Move(7,3, 7,1)); //black's turn
         //try to take queen with rook
         assertTrue("Try to take black queen with rook", model.isValidMove(new Move(1,0, 1,3)));
+    }
 
+    @Test
+    public void checkmateIsTrue() throws Exception {
+        wk = new King(Player.WHITE);
 
+        br = new Rook(Player.BLACK);
+        bq = new Queen(Player.BLACK);
+
+        board = new IChessPiece[8][8];
+        model = new ChessModel(new int[]{0,4,  0,0,  0,7}, new IChessPiece[]{wk,   br, bq});
+
+        //try to throw checkmate
+        assertFalse("Testing checkmate", model.isValidMove(new Move(0,4,0,5)));
     }
 }
