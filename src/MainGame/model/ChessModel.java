@@ -143,6 +143,7 @@ public class ChessModel implements IChessModel {
             {
                 checkmate = false;
                 return checkmate;
+                // this is a test commit
             }
                 for(int x = 0; x < numRows(); x++)
                 {
