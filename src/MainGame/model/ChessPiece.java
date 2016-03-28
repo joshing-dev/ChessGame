@@ -95,7 +95,7 @@ public abstract class ChessPiece implements IChessPiece{
             }
         }
         return false;
-    } //  <--------------  8=============D  Fuck. You.
+    } //  <--------------  (_)_)::::::::::::::::::D  Fuck. You.
 
     public abstract String type();
 }
