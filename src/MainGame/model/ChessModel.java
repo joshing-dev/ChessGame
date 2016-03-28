@@ -7,6 +7,7 @@ import gvprojects.chess.model.Player;
 
 import java.util.ArrayList;
 
+
 /*********************************************************************
  * Created by Cameron Sprowls and Josh Eldridge on 3/20/2016.
  *********************************************************************/
@@ -15,6 +16,29 @@ public class ChessModel implements IChessModel {
     private int numRows, numColumns;
     private Player currentPlayer;
     private IChessPiece[][] board;
+    private ArrayList<Attacker> attackerCoords;
+    private int[] kingCoords;
+
+    private class Attacker
+    {
+        private int x, y;
+
+        private Attacker(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
+        private int getX()
+        {
+            return this.x;
+        }
+
+        private int getY()
+        {
+            return this.y;
+        }
+    }
 
     public ChessModel()
     {
@@ -103,63 +127,58 @@ public class ChessModel implements IChessModel {
     @Override
     public boolean isComplete()
     {
-        /*if(inCheck())
+        if(inCheck())
         {
-            boolean checkmate = false;
-            for (int x = 0; x < numRows(); x++)
+            boolean checkmate = true;
+            int kingRow = kingCoords[0];
+            int kingCol = kingCoords[1];
+            if(!(stillInCheck(new Move(kingRow, kingCol, kingRow - 1, kingCol -1)) ||
+            stillInCheck(new Move(kingRow, kingCol, kingRow - 1, kingCol)) ||
+            stillInCheck(new Move(kingRow, kingCol, kingRow - 1, kingCol +1)) ||
+            stillInCheck(new Move(kingRow, kingCol, kingRow, kingCol -1)) ||
+            stillInCheck(new Move(kingRow, kingCol, kingRow, kingCol + 1)) ||
+            stillInCheck(new Move(kingRow, kingCol, kingRow + 1, kingCol -1)) ||
+            stillInCheck(new Move(kingRow, kingCol, kingRow + 1, kingCol)) ||
+            stillInCheck(new Move(kingRow, kingCol, kingRow + 1, kingCol +1))))
             {
-                for (int y = 0; y < numColumns(); y++)
-                {
-                    for (int x2 = 0; x2 < numRows(); x2++)
-                    {
-                        for (int y2 = 0; y2 < numColumns(); y2++)
-                        {
-                            //FIXME this crap tho
-                            //all so wrong
-                            if (stillInCheck(new Move(x, y, x2, y2)))
-                            {
-                                return true;
-                            }
-                        }
-                    }
-                }
+                checkmate = false;
+                return checkmate;
             }
-            return checkmate;
-        }
-        else
-            return false;
-        */
-
-        int counter = 0;
-        //see if the current player is in check, cause we don't need to test checkmate if they aren't
-        if(inCheck()){
-            //get all of the pieces of the current player
-            for(int x = 0; x < numRows(); x++){
-                for(int y = 0; y < numColumns(); y++){
-                    if(board[x][y] != null) {
-                        //this 100% NEEDS to be here
-                        if (board[x][y].player() == currentPlayer) {
-                            //now try moving those pieces
-                            for (int z = 0; z < numRows(); z++) {
-                                for (int a = 0; a < numColumns(); a++) {
-                                    if (!stillInCheck(new Move(x, y, z, a))) {
-                                        counter++;
+                for(int x = 0; x < numRows(); x++)
+                {
+                    for (int y = 0; y < numColumns(); y++)
+                    {
+                        if (board[x][y] != null)
+                        {
+                            //this 100% NEEDS to be here
+                            if (board[x][y].player() == currentPlayer)
+                            {
+                                for(Attacker a : attackerCoords)
+                                {
+                                    if(board[x][y].isValidMove(new Move(x, y, a.getX(),a.getY()), board))
+                                    {
+                                        checkmate = false;
+                                        return checkmate;
                                     }
                                 }
+
                             }
                         }
                     }
                 }
-            }
-            //count reaches 900? what
-            if(counter == 0){
-                return true;
-            }
+
+            return checkmate;
         }
+        else return false;
 
-        return false;
+         /*
+        Call in check like we always do, if in check get the attackers coordinates
+        First see if king can move one in any direction and check stillInCheck with the moves again
+        then check to see if any piece can take the attacker piece, using the coordinates
+        TODO: finally check to see if any piece can move in between the king and attacker, sigh i don't want to do this one
 
-
+        Any of these will return false for checkmate if they return true, order probably doesn't matter
+         */
     }
 
     @Override
@@ -173,6 +192,7 @@ public class ChessModel implements IChessModel {
                 if(board[x][y] instanceof King && (board[x][y].player() == currentPlayer())){
                     kingx = x;
                     kingy = y;
+                    kingCoords= new int[]{x, y};
                 }
             }
         }
@@ -183,9 +203,11 @@ public class ChessModel implements IChessModel {
             {
                 if(board[x][y] != null)
                 {
+                    attackerCoords = new ArrayList<>();
                     if(board[x][y].isValidMove(new Move(x,y,kingx,kingy), board))
                     {
                         System.out.println("inCheck() returning true");
+                        attackerCoords.add(new Attacker(x,y));
                         return true;
                     }
                 }

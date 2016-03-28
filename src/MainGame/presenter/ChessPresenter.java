@@ -27,7 +27,7 @@ public class ChessPresenter {
          Move m = (Move) ev.getSource();
          System.out.println(m.fromRow + " : " + m.fromColumn);
          if(model.isComplete()){
-            System.out.println("Checkmate");
+            view.showErrorMessage("Checkmate");
          }
          if (model.isValidMove(m)) {
             model.move(m);
