@@ -26,14 +26,15 @@ public class ChessPresenter {
       public void pieceMoved(ChessMoveEvent ev) {
          Move m = (Move) ev.getSource();
          System.out.println(m.fromRow + " : " + m.fromColumn);
-         if(model.isComplete()){
-            view.showErrorMessage("Checkmate");
-         }
+
          if (model.isValidMove(m)) {
             model.move(m);
             view.movePiece(m.fromRow, m.fromColumn, m.toRow, m.toColumn);
             view.showStatusMessage(model.currentPlayer().name()
                   + "'s turn to play");
+            if(model.isComplete()){
+               view.showErrorMessage("Checkmate");
+            }
             view.addMoveRecord(loc(m));
          } else
             //view.showErrorMessage("Can't move that piece");
