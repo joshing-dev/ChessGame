@@ -44,6 +44,12 @@ public abstract class ChessPiece implements IChessPiece{
 
     public boolean isValidMove (Move m, IChessPiece[][] board) throws IndexOutOfBoundsException, IllegalArgumentException
     {
+
+        if(m.toRow > 7 || m.toRow < 0)
+            return false;
+        if(m.toColumn > 7 || m.toColumn < 0)
+            return false;
+
         if(!(board[m.fromRow][m.fromColumn] == (this)))
         {
             throw new IllegalArgumentException();

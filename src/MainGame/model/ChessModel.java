@@ -132,14 +132,14 @@ public class ChessModel implements IChessModel {
             boolean checkmate = true;
             int kingRow = kingCoords[0];
             int kingCol = kingCoords[1];
-            if(!(stillInCheck(new Move(kingRow, kingCol, kingRow - 1, kingCol -1)) ||
-            stillInCheck(new Move(kingRow, kingCol, kingRow - 1, kingCol)) ||
-            stillInCheck(new Move(kingRow, kingCol, kingRow - 1, kingCol +1)) ||
-            stillInCheck(new Move(kingRow, kingCol, kingRow, kingCol -1)) ||
-            stillInCheck(new Move(kingRow, kingCol, kingRow, kingCol + 1)) ||
-            stillInCheck(new Move(kingRow, kingCol, kingRow + 1, kingCol -1)) ||
-            stillInCheck(new Move(kingRow, kingCol, kingRow + 1, kingCol)) ||
-            stillInCheck(new Move(kingRow, kingCol, kingRow + 1, kingCol +1))))
+            if(!stillInCheck(new Move(kingRow, kingCol, kingRow - 1, kingCol -1)) ||
+            !stillInCheck(new Move(kingRow, kingCol, kingRow - 1, kingCol)) ||
+            !stillInCheck(new Move(kingRow, kingCol, kingRow - 1, kingCol +1)) ||
+            !stillInCheck(new Move(kingRow, kingCol, kingRow, kingCol -1)) ||
+            !stillInCheck(new Move(kingRow, kingCol, kingRow, kingCol + 1)) ||
+            !stillInCheck(new Move(kingRow, kingCol, kingRow + 1, kingCol -1)) ||
+            !stillInCheck(new Move(kingRow, kingCol, kingRow + 1, kingCol)) ||
+            !stillInCheck(new Move(kingRow, kingCol, kingRow + 1, kingCol +1)))
             {
                 checkmate = false;
                 return checkmate;
@@ -162,25 +162,99 @@ public class ChessModel implements IChessModel {
                                         return checkmate;
                                     }
                                 }
+                                }
+                            }
+                        }
+                    }
 
+
+            /*
+            So get the path between king coords and attacker(s) coords, and make sure you arent trying to move onto the
+            king and onto the attacker, only between the two
+            So we need to get a diagonal, vertical, or horizontal path, i'm thinking something like the logic from bishop and rook
+            for determining the path
+             */
+            ArrayList<Integer> something = new ArrayList<>();
+            for(int x = 0; x < numRows(); x++) {
+                for (int y = 0; y < numColumns(); y++) {
+                    if (board[x][y] != null) {
+                        if (board[x][y].player() == currentPlayer) {
+                            for (Attacker a : attackerCoords) {
+                                //I need to try to move every piece between the two pieces
+                                //if there can be a piece in the way, checkmate should be false
+                                if(board[a.getX()][a.getY()] instanceof Pawn ||
+                                        board[a.getX()][a.getY()] instanceof Knight ||
+                                        board[a.getX()][a.getY()] instanceof King ||
+                                        board[x][y] instanceof  King){
+                                    //#doNothing
+                                    continue;
+                                }else {
+                                    int rowDiff = a.getX() - kingRow;
+                                    int colDiff = a.getY() - kingCol;
+                                    while (rowDiff != 0 && colDiff != 0) {
+                                        //a bishop, so add the spaces
+
+
+                                        //rook or queen
+                                        if (rowDiff == 0) {
+                                            if (board[x][y].isValidMove(new Move(x, y, kingRow + rowDiff, kingCol + colDiff), board)) {
+                                                checkmate = false;
+                                            }
+                                            if (colDiff < 0) {
+                                                colDiff+=1;
+                                            } else {
+                                                colDiff-=1;
+                                            }
+                                            continue;
+                                        }
+                                        if (colDiff == 0) {
+                                            if (board[x][y].isValidMove(new Move(x, y, kingRow + rowDiff, kingCol + colDiff), board)) {
+                                                checkmate = false;
+                                            }
+                                            if (rowDiff < 0) {
+                                                rowDiff++;
+                                            } else {
+                                                rowDiff--;
+                                            }
+                                            continue;
+                                        }
+                                        if (rowDiff == colDiff) {
+                                            if (board[x][y].isValidMove(new Move(x, y, kingRow + rowDiff, kingCol + colDiff), board)) {
+                                                checkmate = false;
+                                            }
+                                            if (rowDiff < 0) {
+                                                rowDiff++;
+                                            } else {
+                                                rowDiff--;
+                                            }
+                                            if (colDiff < 0) {
+                                                colDiff++;
+                                            } else {
+                                                colDiff--;
+                                            }
+                                        }
+                                    }
+                                }
+
+
+                                //THE SCOPE LEVEL IS OVER 9000
+                                // Wat. oh okay
                             }
                         }
                     }
                 }
+            }
 
-            return checkmate;
-        }
+
+
+
+                return checkmate;
+            }
+
+
         else return false;
+        }
 
-         /*
-        Call in check like we always do, if in check get the attackers coordinates
-        First see if king can move one in any direction and check stillInCheck with the moves again
-        then check to see if any piece can take the attacker piece, using the coordinates
-        TODO: finally check to see if any piece can move in between the king and attacker, sigh i don't want to do this one
-
-        Any of these will return false for checkmate if they return true, order probably doesn't matter
-         */
-    }
 
     @Override
     public boolean inCheck()
@@ -244,11 +318,15 @@ public class ChessModel implements IChessModel {
                 return false;
             }
         }
-        return false;
+        System.out.println("Does it ever hit this point?");
+        return true;
     }
 
     @Override
     public Player currentPlayer() {
         return currentPlayer;
     }
+
+
+
 }

@@ -41,6 +41,7 @@ public class Pawn extends ChessPiece{
             if((Math.abs(m.fromColumn - m.toColumn) == 1) && (Math.abs(m.fromRow - m.toRow) == 1) &&
                     board[m.toRow][m.toColumn] != null &&
                     board[m.toRow][m.toColumn].player() != this.player()){
+                hasMoved = true;
                 return true;
             }
 
